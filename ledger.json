@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "createdAt": "2026-05-26T00:00:00.000Z",
+  "transactions": [
+    {
+      "id": "TXN-1716700800000",
+      "timestamp": "2026-05-26T08:00:00.000Z",
+      "type": "INITIAL_LOAD",
+      "amount": 94,
+      "assetNodes": [
+        "junk_272",
+        "sys_7002",
+        "temp_117"
+      ],
+      "destinationAccount": "PRIMARY_WALLET",
+      "status": "COMPLETED",
+      "conversionRate": 1.00,
+      "usdAmount": 94.00
+    }
+  ],
+  "balanceHistory": [
+    {
+      "timestamp": "2026-05-26T08:00:00.000Z",
+      "previousBalance": 0,
+      "newBalance": 94,
+      "changeAmount": 94,
+      "transactionId": "TXN-1716700800000"
+    }
+  ],
+  "currentBalance": 94,
+  "exportPayloads": [
+    {
+      "id": "PAYLOAD-1716700800000",
+      "transactionId": "TXN-1716700800000",
+      "timestamp": "2026-05-26T08:00:00.000Z",
+      "amount": 94,
+      "usdAmount": 94.00,
+      "assetNodes": [
+        "junk_272",
+        "sys_7002",
+        "temp_117"
+      ],
+      "bankingMetadata": {
+        "conversionRate": 1.00,
+        "processingFee": 0,
+        "netAmount": 94.00,
+        "destination": "PRIMARY_WALLET"
+      },
+      "status": "VALIDATED"
+    }
+  ]
+}
