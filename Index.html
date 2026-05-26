@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindfighter // ByteBucks Export Portal</title>
+    <style>
+        :root {
+            --bg-color: #12141c;
+            --panel-color: #1a1d29;
+            --accent-color: #5b7fff;
+            --success-color: #00e676;
+            --text-main: #ffffff;
+            --text-muted: #707590;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background-color: #171923;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 8px solid #2d3142;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Grid Workspace View */
+        .workspace {
+            flex: 1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            position: relative;
+            padding: 20px;
+        }
+
+        .header-widget {
+            background: rgba(26, 29, 41, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 20px;
+            border-radius: 16px;
+            width: fit-content;
+        }
+
+        .widget-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .widget-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .widget-value span {
+            color: var(--accent-color);
+        }
+
+        /* Simulated File Nodes */
+        .file-node {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            opacity: 0.6;
+        }
+
+        .node-1 { top: 160px; right: 40px; }
+        .node-2 { top: 260px; left: 160px; }
+        .node-3 { top: 340px; right: 60px; }
+
+        .file-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--text-muted);
+            mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>") no-repeat center;
+            -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>") no-repeat center;
+        }
+
+        .file-label {
+            font-size: 10px;
+            margin-top: 6px;
+            color: var(--text-muted);
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Action Sheet Bottom Drawer */
+        .action-sheet {
+            background-color: var(--panel-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px 30px 0 0;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .badge-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #a0b5ff, var(--accent-color));
+            clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 18% 100%, 0% 35%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            box-shadow: 0 10px 25px rgba(91, 127, 255, 0.3);
+        }
+
+        .summary-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .summary-text span {
+            color: var(--success-color);
+        }
+
+        /* Export Button Layout */
+        .btn-export {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-export:active {
+            transform: scale(0.98);
+            background-color: #496be6;
+        }
+
+        /* Terminal Logs simulation overlay */
+        .terminal-log {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: #090a0f;
+            color: var(--success-color);
+            font-family: monospace;
+            font-size: 11px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            transition: height 0.4s cubic-bezier(0.1, 0.8, 0.2, 1), padding 0.1s;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .terminal-log.active {
+            height: 50%;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <div class="workspace">
+            <div class="header-widget">
+                <div class="widget-title">ByteBucks Balance</div>
+                <div class="widget-value"><span id="balance-num">94</span> BB</div>
+            </div>
+
+            <div class="file-node node-1">
+                <div class="file-icon"></div>
+                <div class="file-label">junk_272</div>
+            </div>
+            <div class="file-node node-2">
+                <div class="file-icon"></div>
+                <div class="file-label">sys_7002</div>
+            </div>
+            <div class="file-node node-3">
+                <div class="file-icon"></div>
+                <div class="file-label">temp_117</div>
+            </div>
+        </div>
+
+        <div class="action-sheet">
+            <div class="badge-logo">✦</div>
+            <div class="summary-text">
+                Data Scraping Complete.<br>
+                Ready to transfer <span id="transfer-amount">$94.00 USD</span>
+            </div>
+            <button class="btn-export" onclick="triggerExportPipeline()">Export to Banking App</button>
+        </div>
+
+        <div id="terminal" class="terminal-log"></div>
+    </div>
+
+    <script>
+        function triggerExportPipeline() {
+            const terminal = document.getElementById('terminal');
+            terminal.classList.add('active');
+            terminal.innerHTML = ""; // reset logs
+
+            const logLines = [
+                "[SYSTEM] Initiating mindfighter secure asset export...",
+                "[AUTH] Handshaking with Core Banking API relay...",
+                "[CONVERSION] Exchanging 94 ByteBucks token nodes...",
+                "[CONVERSION] Rate parity verification: 1 BB = $1.00 USD.",
+                "[ROUTING] Packaging cleared ledger balances to target account...",
+                "[PIPELINE] Sending $94.00 transaction payload packet...",
+                "[SUCCESS] Asset successfully validated & cleared by bank node.",
+                "[TRANSACTION COMPLETED]"
+            ];
+
+            logLines.forEach((line, index) => {
+                setTimeout(() => {
+                    const lineElem = document.createElement('div');
+                    lineElem.style.marginBottom = "6px";
+                    lineElem.innerText = line;
+                    terminal.appendChild(lineElem);
+                    terminal.scrollTop = terminal.scrollHeight;
+
+                    if(index === logLines.length - 1) {
+                        setTimeout(() => {
+                            document.getElementById('balance-num').innerText = "0";
+                            document.getElementById('transfer-amount').innerText = "$0.00 USD";
+                            alert("Transfer complete! Asset values exported cleanly.");
+                            terminal.classList.remove('active');
+                        }, 1200);
+                    }
+                }, index * 600);
+            });
+        }
+    </script>
+</body>
+</html>
